@@ -4,14 +4,14 @@
 import random # Python's built-in random
 
 class RandomNumber:
-    value = 0 # the value of this random number
 
     def __init__(self, start, end):
+        self.value = 0 # the value of this random number
         self.start = start
         self.end = end
 
     def __str__(self):
-    	'''to_str()'''
+        '''to_str()'''
         return 'Random number: {}'.format(self.value, )
 
     def set_random(self):
