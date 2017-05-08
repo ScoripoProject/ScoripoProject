@@ -15,8 +15,14 @@ class RandomNumber:
         return 'Random number: {}'.format(self.value, )
 
     def set_random(self):
-	    self.value = random.randint(self.start, self.end)
+        '''Set a random number to the current value'''
+        rnd = self.generate_random()
+        self.value = rnd
 
     def get_random(self):
-        self.set_random()
+        '''Return a random number without changing the current value'''
         return self.value
+
+    def generate_random(self):
+        '''Generate a random number'''
+        return random.randint(self.start, self.end)
