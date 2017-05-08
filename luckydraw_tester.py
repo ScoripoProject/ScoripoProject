@@ -1,0 +1,2 @@
+"""Test case of LuckyDraw.
+"""
