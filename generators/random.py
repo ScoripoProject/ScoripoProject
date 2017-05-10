@@ -26,3 +26,9 @@ class RandomNumber:
     def generate_random(self):
         '''Generate a random number'''
         return random.randint(self.start, self.end)
+    
+    # TODO: It's not good to use set_random(), maybe we should change this class to ABC
+    def generate_random_with_bias(self, bias=1.0):
+        '''Generate a random number with bias'''
+        return round( (random.random() * 100 * bias) % self.end) # TODO: think about what is the different of *100 and *1000?
+
