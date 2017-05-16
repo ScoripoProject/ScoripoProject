@@ -80,6 +80,19 @@ Edit `ALLOWED_HOSTS = []` in setting.py. Activate the virtual environment and th
 	workon rango
 	python manage.py runserver
 
+## Testing
+
+All .py files start with 'test_' could be automatically run with unittest / pytest.
+
+For running unittest:
+
+	python -m unittest
+	
+For running pytest:
+
+	python -m pytest
+
+	
 ## Deployment
 
 Update the requirements.txt with the current packages by
@@ -101,6 +114,9 @@ Reference
 ## Object oriented in Python
 * [Everything I know About Python...: Improve Your Python: Python Classes and Object Oriented Programming](https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/)
 * [doc.python.org: abc — Abstract Base Classes](https://docs.python.org/3/library/abc.html)
+
+## Testing
+* Google:Nose vs Pytest -> https://agopian.info/presentations/2015_06_djangocon_europe/ , [Comparison of py.test and nose for Python testing | Koodaamo](https://koodaamo.wordpress.com/2013/11/29/comparison-of-py-test-and-nose-for-python-testing/)
 
 ## API
 * [“Create a Django API in Under 20 Minutes”] (https://medium.com/@scottdomes/create-a-django-api-in-under-20-minutes-2a082a60f6f3)
