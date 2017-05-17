@@ -118,8 +118,12 @@ Reference
 * [doc.python.org: abc — Abstract Base Classes](https://docs.python.org/3/library/abc.html)
 
 ## Testing
+* Google:unittest -> http://python-guide-pt-br.readthedocs.io/en/latest/writing/tests/
 * Google:Nose vs Pytest -> https://agopian.info/presentations/2015_06_djangocon_europe/ , [Comparison of py.test and nose for Python testing | Koodaamo](https://koodaamo.wordpress.com/2013/11/29/comparison-of-py-test-and-nose-for-python-testing/)
 * [Python Testing](http://pythontesting.net) with markdown.py as an example
+
+# Py.test
+* Google: how to write pytest -> http://pythontesting.net/framework/pytest/pytest-introduction/
 
 ## API
 * [Designing a RESTful Web API](http://blog.luisrei.com/articles/rest.html) from Tango with Django 1.9 ebook, Chapter 13
