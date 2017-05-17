@@ -14,11 +14,10 @@ class RandomTestCase(unittest.TestCase):
         self = None
 
     def test_is_BasicRandomNumber_a_Random(self):
-        self.assertIn(self.rn.get_random(), range(1, 78) )
+        self.assertIsInstance(self.rn, random.BasicRandomNumber )
     
     def test_is_BasicRandomNumber_in_range(self):
         self.assertIn(self.rn.get_random(), range(1,78))
-
 
 # main()
 if __name__ == "__main__":
@@ -32,4 +31,4 @@ if __name__ == "__main__":
     rn_bias.set_random()
     print(rn_bias)
     #help(random.BiasRandomNumber)
-    unittest.main()
+    #unittest.main()
