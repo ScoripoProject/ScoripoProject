@@ -19,6 +19,29 @@ class RandomTestCase(unittest.TestCase):
     def test_is_BasicRandomNumber_in_range(self):
         self.assertIn(self.rn.get_random(), range(1,78))
 
+class TestBasicRandomNumber():
+    '''Tests for random.py with pytest.'''
+    def setup(self):
+        self.rn = random.BasicRandomNumber(1, 78)
+        self.rn.set_random()
+        print('Create a BasicRandomNumber.')
+        print(type(self))
+
+    def teardown(self):
+        self.rn = None
+        print('Delete a BasicRandomNumber.')
+
+    def test_what(self):
+        self.rn.set_random()
+        assert self.rn.get_random() in range(1, 40)
+
+# for py.test
+    '''Tests for random.py with pytest.'''
+def test_is_BasicRandomNumber_in_range_too():
+    rn = random.BasicRandomNumber(1, 78)
+    rn.set_random()
+    assert rn.get_random() in range(1, 78)
+
 # main()
 if __name__ == "__main__":
     print('----A Random Number----')
