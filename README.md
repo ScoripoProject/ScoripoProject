@@ -124,6 +124,7 @@ Reference
 
 # Py.test
 * Google: how to write pytest -> http://pythontesting.net/framework/pytest/pytest-introduction/
+* [docs.pytest.org: Talks and Tutorials](https://docs.pytest.org/en/latest/talks.html) -> [A.Pelme - Testing Django applications with pytest](https://www.youtube.com/watch?v=aUf8Fkb7TaY) -> [PyTest, the testing framework you've been dreaming of by Eli Gur](https://www.youtube.com/watch?v=l0zjVKD7rx8)
 
 ## API
 * [Designing a RESTful Web API](http://blog.luisrei.com/articles/rest.html) from Tango with Django 1.9 ebook, Chapter 13
