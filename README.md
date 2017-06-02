@@ -117,6 +117,9 @@ Reference
 * [Everything I know About Python...: Improve Your Python: Python Classes and Object Oriented Programming](https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/)
 * [doc.python.org: abc — Abstract Base Classes](https://docs.python.org/3/library/abc.html)
 
+## Structure of A Project
+* Google:python module -> [Python Tutorial 第二堂（3）函式、模組、類別與套件 by caterpillar _ CodeData](http://www.codedata.com.tw/python/python-tutorial-the-2nd-class-3-function-module-class-package) -> [Structuring Your Project](http://docs.python-guide.org/en/latest/writing/structure/)
+
 ## Testing
 * Google:unittest -> http://python-guide-pt-br.readthedocs.io/en/latest/writing/tests/
 * Google:Nose vs Pytest -> https://agopian.info/presentations/2015_06_djangocon_europe/ , [Comparison of py.test and nose for Python testing | Koodaamo](https://koodaamo.wordpress.com/2013/11/29/comparison-of-py-test-and-nose-for-python-testing/)
