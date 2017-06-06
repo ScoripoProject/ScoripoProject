@@ -2,6 +2,9 @@
 ##           TEST CASE OF RANDOM                ##
 ##################################################
 import unittest
+# Use pytest instead of the builtin unittest to perform unittest
+#     python3 -m pytest -v tests/test_xxx.py
+
 from generators import random #import generators.random
 
 class RandomTestCase(unittest.TestCase):
@@ -33,7 +36,7 @@ class TestBasicRandomNumber():
 
     def test_what(self):
         self.rn.set_random()
-        assert self.rn.get_random() in range(1, 40)
+        assert self.rn.get_random() in range(1, 78)
 
 # for py.test
     '''Tests for random.py with pytest.'''
