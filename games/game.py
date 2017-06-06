@@ -93,16 +93,13 @@ class Lottery:
         return self.rand_engine.get_random() # then get the value of randomnumber.value
 
     def get_randoms(self):
-        '''Return a list of numbers'''
+        '''Return a list of object of RandomNumber.'''
         return self.number_list
 
     def sum(self):
         '''Sum up the value in number_list.'''
-        #sum = 0
-        #for rand_item in self.number_list:
-        #    sum += rand_item.value
-        numbers = [rand.get_random() for rand in number_list]
-        return sum(numbers)      
+        #numbers = [self.number_list[i].get_random() for i in self.number_list]
+        return sum(self.number_list)
 
     def reset(self):
         '''Reset lottery to empty.'''
