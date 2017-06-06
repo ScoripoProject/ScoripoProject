@@ -45,6 +45,17 @@ def test_is_BasicRandomNumber_in_range_too():
     rn.set_random()
     assert rn.get_random() in range(1, 78)
 
+def test_add__():
+    rn1 = random.BasicRandomNumber(1, 78)
+    rn2 = random.BasicRandomNumber(1, 78)
+    rn1.set_random()
+    rn2.set_random()
+
+    a = rn1.get_random()
+    b = rn2.get_random()
+    assert (rn1 + rn2) == (a+b)
+
+
 # main()
 if __name__ == "__main__":
     print('----A Random Number----')

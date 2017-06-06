@@ -34,7 +34,7 @@ class RandomNumber(metaclass=ABCMeta):
         return 'Random number: {}'.format(self.value, )
 
     def set_random(self):
-        '''Set a random number to the current value'''
+        '''Ask for generating a random number, and set it to self.value'''
         rnd = self.generate_random()
         self.value = rnd
 
@@ -46,6 +46,9 @@ class RandomNumber(metaclass=ABCMeta):
     def generate_random(self):
         '''Generate a random number'''
         return random.randint(self.start, self.end)
+
+    def __add__(self, other):
+        return self.value + other.value
 
 class BasicRandomNumber(RandomNumber):
 
