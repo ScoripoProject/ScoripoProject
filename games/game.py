@@ -7,9 +7,6 @@ from generators.random import RandomNumber, BasicRandomNumber
 from abc import ABCMeta, abstractmethod # MetaClass for defining Abstract Base Classes
 
 
-class Game():
-    pass
-"""
 class Game(metaclass=ABCMeta):
     '''An abstract base class of games.
 
@@ -20,7 +17,11 @@ class Game(metaclass=ABCMeta):
 	https://en.wikipedia.org/wiki/Information
 
     Attributes:
-    * status     an integer representing the value of a random number
+    * status             a string representing the status of this game
+    * SIZE_OF_LOTTERY    how much lottery (ticket) this game has
+    * MIN                the mix value of random number
+    * MAX                the max value of random number
+    * lottery_numbers    a list contains lottery objects
 
     Class hierarchy:
     |--* Game
@@ -31,30 +32,26 @@ class Game(metaclass=ABCMeta):
 
     '''
     def __init__(self):
-        print('A new Game has been created.')
+        self.status = "Initializing"
         self.SIZE_OF_LOTTERY = 49
         self.MIN = 1
         self.MAX = 65535
         self.lottery_numbers = [] # a list of Lottery
-        print('An empty list of lottery numbers is prepared.')
 
     def __str__(self):
         '''to_str()'''
         return 'Game: {}'.format(self.value, )
 
     def setup(self):
-        self.jamming = _get_jamming() # jaming from the real world
-        self._prepare_game_deck() # prepare the lottery_numbers
+        pass
 
     def _draw(self, lottery_numbers):
         pass
         
-
-
     def _setup_lottery_numbers(size):
         pass
         
-    
+    @abstractmethod
     def run(self):
         '''Run the game.
         
@@ -66,8 +63,64 @@ class Game(metaclass=ABCMeta):
         6. Repeat step 3~4, until 10~12 lottery numbers remain in the list.
         7.
         '''
-        self.lottery_numbers = _setup_lottery_numbers(self.SIZE) # 49 numbers
-"""
+
+class SingleGame(Game):
+    '''An class of playing single game.
+
+    This module implements algorithm for playing a single game.
+
+    Attributes:
+    * status             a string representing the status of this game
+    * SIZE_OF_LOTTERY    how much lottery (ticket) this game has
+    * no_of_rand_in_lottery how much random number each lottery has
+    * MIN                the mix value of random number
+    * MAX                the max value of random number
+    * lottery_numbers    a list contains Lottery objects
+
+    '''
+    def __init__(self):
+        '''Initize the game deck.'''
+        # TODO: use super().__init__()
+        self.status = "Initializing"
+        print('A new Single Game has been created.')
+        self.SIZE_OF_LOTTERY = 49
+        self.MIN = 1
+        self.MAX = 65535
+        self.lottery_numbers = [] # a list of Lottery
+        self.no_of_rand_in_lottery = 3
+        print('An empty list of lottery numbers is prepared.')
+        self.status = "Start"
+
+    def setup(self):
+        self.jamming = _get_jamming() # jaming from the real world
+        self._prepare_game_deck() # prepare the lottery_numbers
+
+    def _draw(self, lottery_numbers):
+        pass
+        
+    def _setup_lottery_numbers(size):
+        pass
+        
+    def _get_jamming():
+        '''Get jamming from the real world'''
+        pass
+
+    def _prepare_game_deck():
+        pass
+
+    def run(self):
+        '''Run the game.
+        
+        1. Create a list of 49 lottery numbers.
+        2. For each lottery number, attach 3 to 5 random numbers.
+        3. Sum up that random numbers.
+        4. If the (sum % 6) == 1 or 4, remove the lottery number from the list.
+        5. For the rest lottery numbers in the list, attach 3 to 5 NEW random numbers.
+        6. Repeat step 3~4, until 10~12 lottery numbers remain in the list.
+        7.
+        '''
+
+
 class Lottery:
     '''Each Lottery holds 3~5 numbers that are generated randomly.'''
 
@@ -82,7 +135,11 @@ class Lottery:
         return 'Lottery: #{}'.format(self.title)
 
     def set_randoms(self, no_of_numbers):
-        '''Generate a list of numbers.'''
+        '''Generate a list of numbers.
+
+        New random numbers will be appended to the end of the list.
+        Therefore, self.reset() should be called to empty the list in each round.        
+        '''
         for i in range(no_of_numbers):
             self.number_list.append(self._set_random())
         #self.number_list = [self._set_random() for i in range(no_of_numbers)]
@@ -102,41 +159,8 @@ class Lottery:
         return sum(self.number_list)
 
     def reset(self):
-        '''Reset lottery to empty.'''
+        '''Reset lottery to empty.
+
+         Be called each time a Lottery draws a set of new random numbers.
+         '''
         del self.number_list[:]
-
-
-
-
-"""
-    def set_random(self):
-        '''Set a random number to the current value'''
-        rnd = self.generate_random()
-        self.value = rnd
-
-    def get_random(self):
-        '''Return a random number without changing the current value'''
-        return self.value
-
-    @abstractmethod
-    def generate_random(self):
-        '''Generate a random number'''
-        return random.randint(self.start, self.end)
-
-class SingleGame(Game):
-
-    def generate_random(self):
-        '''Generate a random number'''
-        return random.randint(self.start, self.end)
-
-class SequentialGame(Game):
-    '''Generate a random number with bias'''
-
-    def __init__(self, start, end, bias=1.0):
-        super().__init__(start, end)
-        self.bias = bias
-
-    def generate_random(self):
-        '''Generate a random number with bias'''
-        return round( (random.random() * 100 * self.bias) % self.end) # TODO: think about what is the different of *100 and *1000?
-"""
