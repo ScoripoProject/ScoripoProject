@@ -128,6 +128,7 @@ class SingleGame(Game):
         #self.lottery_numbers.append(Lottery(5, 3,  1 , 360) )
         #self.lottery_numbers.append(Lottery(6, 3,  1 , 360) )
         #self.lottery_numbers.append(Lottery(7, 3,  1 , 360) )
+        self.status = "Initializing"
 
         # 1.
         #for i in range(self.SIZE_OF_LOTTERY):
@@ -136,18 +137,14 @@ class SingleGame(Game):
         #self.lottery_numbers = [Lottery(i, 49, 1, 65535) for i in range(49)]
         # 2.
         for item in self.lottery_numbers:
-            item.set_randoms(3)
+            if len(item.get_randoms()) < self.ticket: # IF: prevent duplicately put random nomubers into a lottery
+                item.set_randoms(self.ticket)
         # 3, 4.
             if (item.sum() % 6 == 1) or (item.sum() % 6 == 4):
                 self.lottery_numbers.remove(item)
         # 5.
-            item.reset()
             print(item)
-
-
-
-
-
+            item.reset()
 
 
 class Lottery:
@@ -158,10 +155,11 @@ class Lottery:
         self.number_list = [] # a list of numbers that is random, size from 3~5
         self.rand_engine = BasicRandomNumber(rand_start, rand_end)
 
-        self.set_randoms(no_of_numbers)
+        if len(self.number_list) == 0: # prevent duplicately put random numbers into a Lottery
+            self.set_randoms(no_of_numbers)
 
     def __str__(self):
-        return 'Lottery: #{}'.format(self.title)
+        return 'Lottery: #{} with {} => {}'.format(self.title, self.get_randoms(), self.sum())
 
     def set_randoms(self, no_of_numbers):
         '''Generate a list of numbers.
