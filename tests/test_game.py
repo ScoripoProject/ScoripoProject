@@ -6,7 +6,7 @@
 #     python3 -m pytest -v tests/test_xxx.py
 
 #from games import game
-from games.game import Game #or from ..games.game import Game
+from games.game import Game, SingleGame #or from ..games.game import Game
 from games.game import Lottery
 from generators.random import BasicRandomNumber
 
@@ -14,13 +14,27 @@ from generators.random import BasicRandomNumber
 'Tests for game.py with pytest.'''
 # Test of Game
 def test_init_of_game():
-    game1 = Game()
-    assert type(game1) is Game
+    game1 = SingleGame()
+    assert isinstance(game1, Game)
+    assert isinstance(game1, SingleGame)
 
 def test_str_of_game():
-    game1 = Game()
+    game1 = SingleGame()
     game1.value = "hello"
     assert "hello" == game1.value
+
+def test_run():
+    size_of_lottery = 49
+    MIN = 1
+    MAX = 65535
+    ticket = 3
+
+    game1 = SingleGame()
+    assert isinstance(game1.lottery_numbers, list)
+    game1.run()
+    assert len(game1.lottery_numbers) == 49
+    assert game1.lottery_numbers[15].__str__() == 'Lottery: #15'
+
 
 # Test of Lottory
 def test_init_of_lottory():

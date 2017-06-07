@@ -40,7 +40,7 @@ class Game(metaclass=ABCMeta):
 
     def __str__(self):
         '''to_str()'''
-        return 'Game: {}'.format(self.value, )
+        return 'Game: {}'.format(self.status, )
 
     def setup(self):
         pass
@@ -72,7 +72,7 @@ class SingleGame(Game):
     Attributes:
     * status             a string representing the status of this game
     * SIZE_OF_LOTTERY    how much lottery (ticket) this game has
-    * no_of_rand_in_lottery how much random number each lottery has
+    * ticket             how much random number each lottery has
     * MIN                the mix value of random number
     * MAX                the max value of random number
     * lottery_numbers    a list contains Lottery objects
@@ -87,7 +87,7 @@ class SingleGame(Game):
         self.MIN = 1
         self.MAX = 65535
         self.lottery_numbers = [] # a list of Lottery
-        self.no_of_rand_in_lottery = 3
+        self.ticket = 3
         print('An empty list of lottery numbers is prepared.')
         self.status = "Start"
 
@@ -119,6 +119,35 @@ class SingleGame(Game):
         6. Repeat step 3~4, until 10~12 lottery numbers remain in the list.
         7.
         '''
+        #self.lottery_numbers = _setup_lottery_numbers(self.SIZE) # 49 numbers
+
+        #self.lottery_numbers.append(Lottery(1, 3,  1 , 360) )
+        #self.lottery_numbers.append(Lottery(2, 3,  1 , 360) )
+        #self.lottery_numbers.append(Lottery(3, 3,  1 , 360) )
+        #self.lottery_numbers.append(Lottery(4, 3,  1 , 360) )
+        #self.lottery_numbers.append(Lottery(5, 3,  1 , 360) )
+        #self.lottery_numbers.append(Lottery(6, 3,  1 , 360) )
+        #self.lottery_numbers.append(Lottery(7, 3,  1 , 360) )
+
+        # 1.
+        #for i in range(self.SIZE_OF_LOTTERY):
+        #    self.lottery_numbers.append(Lottery(i+1, self.ticket, self.MIN, self.MAX))
+        self.lottery_numbers = [Lottery(i, self.ticket, self.MIN, self.MAX) for i in range(self.SIZE_OF_LOTTERY)]
+        #self.lottery_numbers = [Lottery(i, 49, 1, 65535) for i in range(49)]
+        # 2.
+        for item in self.lottery_numbers:
+            item.set_randoms(3)
+        # 3, 4.
+            if (item.sum() % 6 == 1) or (item.sum() % 6 == 4):
+                self.lottery_numbers.remove(item)
+        # 5.
+            item.reset()
+            print(item)
+
+
+
+
+
 
 
 class Lottery:
