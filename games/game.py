@@ -5,6 +5,7 @@
 #from ..generators.random import RandomNumber #PROBLEM:cannot do relative import
 from generators.random import RandomNumber, BasicRandomNumber
 from abc import ABCMeta, abstractmethod # MetaClass for defining Abstract Base Classes
+import time # time.sleep()
 
 
 class Game(metaclass=ABCMeta):
@@ -76,6 +77,7 @@ class SingleGame(Game):
     * MIN                the mix value of random number
     * MAX                the max value of random number
     * lottery_numbers    a list contains Lottery objects
+    * round              how much round this game runs
 
     '''
     def __init__(self):
@@ -90,6 +92,7 @@ class SingleGame(Game):
         self.ticket = 3
         print('An empty list of lottery numbers is prepared.')
         self.status = "Start"
+        self.round = 0
 
     def setup(self):
         self.jamming = _get_jamming() # jaming from the real world
@@ -135,16 +138,20 @@ class SingleGame(Game):
         #    self.lottery_numbers.append(Lottery(i+1, self.ticket, self.MIN, self.MAX))
         self.lottery_numbers = [Lottery(i, self.ticket, self.MIN, self.MAX) for i in range(self.SIZE_OF_LOTTERY)]
         #self.lottery_numbers = [Lottery(i, 49, 1, 65535) for i in range(49)]
-        # 2.
-        for item in self.lottery_numbers:
-            if len(item.get_randoms()) < self.ticket: # IF: prevent duplicately put random nomubers into a lottery
-                item.set_randoms(self.ticket)
-        # 3, 4.
-            if (item.sum() % 6 == 1) or (item.sum() % 6 == 4):
-                self.lottery_numbers.remove(item)
-        # 5.
-            print(item)
-            item.reset()
+        while len(self.lottery_numbers) > 12:
+            # 2.
+            for item in self.lottery_numbers:
+                if len(item.get_randoms()) < self.ticket: # IF: prevent duplicately put random nomubers into a lottery
+                    item.set_randoms(self.ticket)
+            # 3, 4.
+                if (item.sum() % 6 == 1) or (item.sum() % 6 == 4):
+                    self.lottery_numbers.remove(item)
+                print(item)
+            # 5.
+                item.reset()
+            self.round += 1
+            print('-----no of lottery in round #{}: {}------'.format(self.round, len(self.lottery_numbers)))
+            #time.sleep(2)
 
 
 class Lottery:
