@@ -144,7 +144,7 @@ class SingleGame(Game):
             # 2.
             for item in self.lottery_numbers:
             # 5.
-                item.reset() # DEBUG: prevent duplicately put random nomubers into a lottery
+                #item.reset() # DEBUG: prevent duplicately put random nomubers into a lottery
                 item.set_randoms(self.ticket)
             # 3, 4.
                 if (item.sum() % 6 == 1) or (item.sum() % 6 == 4):
@@ -172,7 +172,6 @@ class Lottery:
         self.number_list = [] # a list of numbers that is random, size from 3~5
         self.rand_engine = BasicRandomNumber(rand_start, rand_end)
 
-        self.reset() # prevent duplicately put random numbers into a Lottery
         self.set_randoms(no_of_numbers)
 
     def __str__(self):
@@ -184,6 +183,7 @@ class Lottery:
         New random numbers will be appended to the end of the list.
         Therefore, self.reset() should be called to empty the list in each round.        
         '''
+        self.reset() # prevent duplicately put random numbers into a Lottery
         for i in range(no_of_numbers):
             self.number_list.append(self._set_random())
         #self.number_list = [self._set_random() for i in range(no_of_numbers)]
