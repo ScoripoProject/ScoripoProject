@@ -89,6 +89,7 @@ class SingleGame(Game):
         self.MIN = 1
         self.MAX = 65535
         self.lottery_numbers = [] # a list of Lottery
+        self.remove_numbers = [] # DEBUG use
         self.ticket = 3
         print('An empty list of lottery numbers is prepared.')
         self.status = "Start"
@@ -138,20 +139,29 @@ class SingleGame(Game):
         #    self.lottery_numbers.append(Lottery(i+1, self.ticket, self.MIN, self.MAX))
         self.lottery_numbers = [Lottery(i, self.ticket, self.MIN, self.MAX) for i in range(self.SIZE_OF_LOTTERY)]
         #self.lottery_numbers = [Lottery(i, 49, 1, 65535) for i in range(49)]
+        # 6.
         while len(self.lottery_numbers) > 12:
             # 2.
             for item in self.lottery_numbers:
-                if len(item.get_randoms()) < self.ticket: # IF: prevent duplicately put random nomubers into a lottery
-                    item.set_randoms(self.ticket)
+            # 5.
+                item.reset() # DEBUG: prevent duplicately put random nomubers into a lottery
+                item.set_randoms(self.ticket)
             # 3, 4.
                 if (item.sum() % 6 == 1) or (item.sum() % 6 == 4):
-                    self.lottery_numbers.remove(item)
-                print(item)
-            # 5.
-                item.reset()
+                    index = self.lottery_numbers.index(item) # put into self.remove_numbers for DEBUG
+                    remove = self.lottery_numbers.pop(index)
+                    self.remove_numbers.append(remove)
             self.round += 1
-            print('-----no of lottery in round #{}: {}------'.format(self.round, len(self.lottery_numbers)))
+            print('Lottery in list vs. Lottery that throw away - {}, {}'.format(len(self.lottery_numbers) , len(self.remove_numbers)))
+            #print('-----no of lottery in round #{}: {}------'.format(self.round, len(self.lottery_numbers)))
             #time.sleep(2)
+        self.status = "Game finished."
+        print(self)
+        [print(item) for item in self.lottery_numbers]
+        print('----')
+        [print(item) for item in self.remove_numbers]
+
+
 
 
 class Lottery:
@@ -162,8 +172,8 @@ class Lottery:
         self.number_list = [] # a list of numbers that is random, size from 3~5
         self.rand_engine = BasicRandomNumber(rand_start, rand_end)
 
-        if len(self.number_list) == 0: # prevent duplicately put random numbers into a Lottery
-            self.set_randoms(no_of_numbers)
+        self.reset() # prevent duplicately put random numbers into a Lottery
+        self.set_randoms(no_of_numbers)
 
     def __str__(self):
         return 'Lottery: #{} with {} => {}'.format(self.title, self.get_randoms(), self.sum())
